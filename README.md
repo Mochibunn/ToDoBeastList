@@ -12,5 +12,7 @@
   - To view the developer commentary showcase, please visit [this link🔗](https://go.mochibun.me/qziRlT "Documentation")
 3. #### I spy with my little eye something white
   - *TODO: Find out what that might be* 🔎
-  </br>
-  ![](./res/img/mochiwink.png "Mochibun wink logo")
+
+</br>
+
+![](./res/img/mochiwink.png "Mochibun wink logo")
