@@ -13,4 +13,4 @@
 3. #### I spy with my little eye something white
   - *TODO: Find out what that might be* 🔎
   </br>
-  ![](/res/img/mochiwink.png)
+  ![](./res/img/mochiwink.png "Mochibun wink logo")
