@@ -1,0 +1,25 @@
+body {
+  margin: 1% 10vw;
+}
+#listTitleInput {
+  border: none;
+  font-size: 3em;
+  font-weight: bold;
+  text-decoration: none;
+}
+#decoration {
+  border-bottom: 1px solid #111;
+  width: 75vw;
+  padding-top: 1%;
+}
+input:focus::placeholder {
+  color: transparent;
+  outline: none;
+}
+input::placeholder{
+  color: #000000;
+} 
+input:focus, textarea:focus {
+  outline: none;
+}
+/* !Do not change any CSS above unless absolutely necessary (Ask Mochi first to avoid merge conflicts) */
