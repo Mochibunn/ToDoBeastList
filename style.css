@@ -1,11 +1,13 @@
 body {
   margin: 1% 10vw;
+  font-family: Arial, Helvetica, sans-serif;
 }
 #listTitleInput {
   border: none;
   font-size: 3em;
   font-weight: bold;
   text-decoration: none;
+  width: 100%;
 }
 #decoration {
   border-bottom: 1px solid #111;
