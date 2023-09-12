@@ -1,5 +1,5 @@
 console.log(`Hello from create.js!`)
-const enterKey = document.querySelector(".listItem");
+const enterKey = document.querySelector("#listContainer");
 enterKey.addEventListener("keydown", ((e) => {
   if (e.keyCode == 13 && !e.shiftKey)
   {
@@ -16,13 +16,16 @@ let itemCount = [0];
 const newLine = () => {
   console.log(`New line coming right up!`);
 
+  const curDate = Date.now();
   const list = document.querySelector(`#listContainer`);
   const newListItem = document.createElement(`li`);
   const newTextArea = document.createElement(`textarea`);
   newTextArea.classList.add(`listItem`);
+  newTextArea.setAttribute(`id`,curDate);
   newListItem.appendChild(newTextArea);
-  focus(newListItem);
   list.appendChild(newListItem);
+  console.log(list);
+  // const focusTo = list.lastElementChild.innerHTML.focus();
 };
 
   // const newLine = () => {
