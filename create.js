@@ -11,6 +11,8 @@ enterKey.addEventListener("keydown", ((e) => {
     }
   }));
 
+
+  
 let itemCount = [0];
 
 const newLine = () => {
