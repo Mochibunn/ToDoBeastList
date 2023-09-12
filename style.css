@@ -11,6 +11,13 @@ input, textarea {
   text-decoration: none;
   width: 100%;
 }
+textarea {
+  border: none;
+  font-size: 2em;
+  font-weight: 400;
+  text-decoration: none;
+  width: 100%;
+}
 .listItem {
   font-family: Arial, Helvetica, sans-serif;
   resize: none;
