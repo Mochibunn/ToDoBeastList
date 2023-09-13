@@ -4,7 +4,9 @@
 ul, li {
   padding: 0;
   list-style: none;
-  display: inline;
+}
+li {
+  display: flex;
 }
 body {
   margin: 1% 10vw;

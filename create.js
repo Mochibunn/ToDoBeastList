@@ -22,13 +22,19 @@ const newLine = () => { // * New text input creator
   const list = document.querySelector(`#listContainer`);
   const newListItem = document.createElement(`li`);
   const newTextArea = document.createElement(`textarea`);
+  const newBtn = document.createElement(`button`);
   newTextArea.classList.add(`listItem`);
   newTextArea.setAttribute(`id`,curDate);
+  newBtn.classList.add(`listBtn`);
+  newBtn.textContent = `+`;
   newListItem.appendChild(newTextArea);
+  newListItem.appendChild(newBtn);
   list.appendChild(newListItem);
-  console.log(list); //? Sadly, I can't figure out how to focus on new text box :(
-  // const focusTo = list.lastElementChild.innerHTML.focus();
+  newTextArea.focus();
 };
+
+const listBtn = document.querySelector(`.listBtn`);
+listBtn.addEventListener(`click`, () => {newLine()});
 
   // const newLine = () => {
 //   let i = document.getElementsByClassName("listItem").length - 1;
