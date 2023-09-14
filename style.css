@@ -6,7 +6,7 @@ ul, li {
   list-style: none;
 }
 li {
-  display: flex;
+  /* display: flex; */
 }
 body {
   margin: 1% 10vw;

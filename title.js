@@ -10,8 +10,8 @@ window.addEventListener("load", (() => {
     return; //* Stop executing the rest
   }; //* Should the if condition fail, run this 
   const titleStore = localStorage.getItem(`title`); //* Get title content
-  console.log(`Here is the tab title!`); //! DEBUG
-  console.log(titleStore);  //! DEBUG
+  // console.log(`Here is the tab title!`); //! DEBUG
+  // console.log(titleStore);  //! DEBUG
   if (titleStore === `Untitled`){ //* If the title is `Untitled`, set it as a placeholder
     listTitle.placeholder = `Untitled`;
     document.title = `Untitled | To-Do Beast List`;

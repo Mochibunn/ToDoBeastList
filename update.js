@@ -1,7 +1,7 @@
 console.log(`Hello from update.js! ENGINE REWORK IN PROGRESS`);
 
 
-const show = (todo) => {
+export const show = (todo) => {
   const list = document.querySelector(`.listContainer`);
 
   const isChecked = todo.checked ? `checked` : ``;
@@ -26,11 +26,11 @@ const show = (todo) => {
   const newBtn = document.createElement(`button`);
   newBtn.textContent = `+`;
 
-  // listItem.appendChild(newChkBox);
-  // listItem.appendChild(newLabel);
-  // listItem.appendChild(delBtn);
-  // listItem.appendChild(newBtn);
-  // list.appendChild(listItem);    
+  listItem.appendChild(newChkBox);
+  listItem.appendChild(newLabel);
+  listItem.appendChild(delBtn);
+  listItem.appendChild(newBtn);
+  list.appendChild(listItem);    
 
   // newTextArea.classList.add(`listItem`);
   // newTextArea.setAttribute(`id`, todo.id);
@@ -38,7 +38,6 @@ const show = (todo) => {
   // newBtn.classList.add(`listBtn`);
   // listItem.appendChild(newTextArea);
   // listItem.appendChild(newBtn);
-
 };
 
 
