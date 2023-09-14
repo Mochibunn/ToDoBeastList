@@ -13,6 +13,16 @@ listTrack.forEach(element => {
     const trimmed = element.value.trim();
     console.log(listTrack.id);
     localStorage.setItem(element.id, trimmed);
+    element.value = trimmed;
   });
 });
 }, 1000);
+
+const tabTitle = document.querySelector(`#tabTitle`);
+tabTitle.addEventListener("keyup", () => {
+  console.log(`Hello from the function!`);
+  const trimmed = element.value.trim();
+  console.log(listTrack.id);
+  localStorage.setItem(`title`, trimmed);
+  element.value = trimmed;
+});
