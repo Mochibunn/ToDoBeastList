@@ -14,6 +14,7 @@ window.addEventListener("load", (() => {
   console.log(titleStore);  //! DEBUG
   if (titleStore === `Untitled`){ //* If the title is `Untitled`, set it as a placeholder
     listTitle.placeholder = `Untitled`;
+    document.title = `Untitled | To-Do Beast List`;
   } else { //* Otherwise, set the title as a value
     listTitle.value = titleStore; //* Set the list title to the key value
     document.title = titleStore + ` | To-Do Beast List`; //* Set tab title
