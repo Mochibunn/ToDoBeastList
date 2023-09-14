@@ -13,7 +13,29 @@ list.addEventListener("keydown", ((e) => {
   })); // * Prevents Enter key from making a new line and calls a new textbox function
 //! Function allows for Shift + Enter to make a new line anyways, it's not a bug
 
-let itemCount = [0]; //! Probably deprecated
+
+
+
+
+class NewLine {
+  #id;
+  #value;
+  
+  constructor(id, e) {
+    this.#id = id;
+    this.#value = e;
+    this.newLine()
+  }
+  newline() {
+console.log(`Hello!`);
+  }
+}
+
+
+
+
+
+
 
 const newLine = () => { // * New text input creator
   console.log(`New line coming right up!`);
@@ -68,7 +90,6 @@ window.addEventListener("load", () => { //* Load items from memory
   return;
 };
 newLine();
-
 });
 
 setTimeout(()=> {
