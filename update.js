@@ -8,22 +8,36 @@ const show = (todo) => {
   const listItem = document.createElement(`li`);
   listItem.setAttribute(`class`, `listItem ${isChecked}`);
   listItem.setAttribute(`data-key`, todo.id);
-  
-
   const newChkBox = document.createElement(`input`);
   newChkBox.setAttribute(`id`, todo.id);
   newChkBox.setAttribute(`type`, `checkbox`);
+  const newLabel = document.createElement(`label`);
+  newLabel.setAttribute(`for`, todo.id);
+  newLabel.setAttribute(`class`, `tick js-tick`); //TODO Check classes!
   const newTextArea = document.createElement(`textarea`);
-  newTextArea.classList.add(`listItem`);
-  newTextArea.setAttribute(`id`, todo.id);
-  newTextArea.value = (a);
+  newTextArea.value = todo.txt;
+  newLabel.appendChild(newTextArea);
+  const delBtn = document.createElement(`button`);
+  delBtn.setAttribute(`class`, `delete-item js-delete-item`); //! Check!
+  const delIcon = document.createElement(`img`);
+  delIcon.setAttribute(`src`, `./res/img/recycle.svg`);
+  delIcon.setAttribute(`alt`, `Recycle bin icon`); //* A11Y FTW
+  delBtn.appendChild(delIcon);
   const newBtn = document.createElement(`button`);
-  newBtn.classList.add(`listBtn`);
   newBtn.textContent = `+`;
-  listItem.appendChild(newTextArea);
-  listItem.appendChild(newBtn);
-  list.appendChild(listItem);    
 
+  // listItem.appendChild(newChkBox);
+  // listItem.appendChild(newLabel);
+  // listItem.appendChild(delBtn);
+  // listItem.appendChild(newBtn);
+  // list.appendChild(listItem);    
+
+  // newTextArea.classList.add(`listItem`);
+  // newTextArea.setAttribute(`id`, todo.id);
+  // newTextArea.value = (a);
+  // newBtn.classList.add(`listBtn`);
+  // listItem.appendChild(newTextArea);
+  // listItem.appendChild(newBtn);
 
 };
 
