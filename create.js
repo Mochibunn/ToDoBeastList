@@ -1,4 +1,5 @@
 console.log(`Hello from create.js!`)
+let todoItems = [];
 const list = document.querySelector(`#listContainer`);
 
 list.addEventListener("keydown", ((e) => {
@@ -12,29 +13,6 @@ list.addEventListener("keydown", ((e) => {
     }
   })); // * Prevents Enter key from making a new line and calls a new textbox function
 //! Function allows for Shift + Enter to make a new line anyways, it's not a bug
-
-
-
-
-
-class NewLine {
-  #id;
-  #value;
-  
-  constructor(id, e) {
-    this.#id = id;
-    this.#value = e;
-    this.newLine()
-  }
-  newline() {
-console.log(`Hello!`);
-  }
-}
-
-
-
-
-
 
 
 const newLine = () => { // * New text input creator
@@ -96,6 +74,7 @@ setTimeout(()=> {
 const listBtn = document.querySelector(`.listBtn`); //* Button to add new
 listBtn.addEventListener(`click`, () => {newLine()}); //* textarea
 }, 1000);
+
 // const newLine = () => {
 //   let i = document.getElementsByClassName("listItem").length - 1;
 //   console.log("This is i: " + i);
