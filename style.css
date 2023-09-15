@@ -49,11 +49,15 @@ button {
   font-size: 2em;
   font-weight: bold;
 }
-.listItem {
+.liText {
   font-family: Arial, Helvetica, sans-serif;
   resize: none;
   overflow: hidden;
-  display: block;
+}
+.tick textarea {
+  /* display: flex;
+  text-align: center;
+  align-items: center; */
 }
 #decoration {
   border-bottom: 1px solid #111;
@@ -68,5 +72,8 @@ input::placeholder{
 } 
 input:focus, textarea:focus {
   outline: none;
+}
+img {
+  height: 1.25em;
 }
 /* !Do not change any CSS above unless absolutely necessary (Ask Mochi first to avoid merge conflicts) */
