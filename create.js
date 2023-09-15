@@ -1,11 +1,9 @@
 console.log(`Hello from create.js!`)
 import { addTodo } from "./create1.js";
-let todoItems = [];
 const list = document.querySelector(`#listContainer`);
 
 window.addEventListener("keydown", ((e) => {
-  if (e.keyCode == 13 && !e.shiftKey) //! How do I write it in a non deprecated way??
-  {
+  if (e.key === "Enter" && !e.shiftKey) {
     // prevent enter
     e.preventDefault();
     addTodo(``);

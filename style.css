@@ -7,7 +7,8 @@ ul, li {
 }
 li {
   display: flex;
-  flex-flow: wrap;
+  flex-flow: nowrap;
+  justify-content: space-between;
 }
 body {
   margin: 1% 10vw;
@@ -19,12 +20,12 @@ input {
   text-decoration: none;
   width: 100%;
 }
-textarea {
+textarea.liText {
   border: none;
   font-size: 2em;
   font-weight: 400;
   text-decoration: none;
-  width: 100%;
+  width: 70vw;
 }
 textarea:focus{
   border-bottom: solid 1px #000000;
@@ -58,6 +59,7 @@ button {
   /* display: flex;
   text-align: center;
   align-items: center; */
+  /* text-decoration: line-through; */
 }
 #decoration {
   border-bottom: 1px solid #111;

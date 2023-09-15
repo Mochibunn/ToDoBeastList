@@ -1,8 +1,9 @@
 console.log(`Hello from update.js! ENGINE REWORK IN PROGRESS`);
-
+import { todoItems, txtTrim } from "./create1.js";
+import { txtResize } from "./resize.js";
 
 export const show = (todo) => {
-  const list = document.querySelector(`.listContainer`);
+  const list = document.querySelector(`.js-listContainer`);
 
   const isChecked = todo.checked ? `checked` : ``;
   const listItem = document.createElement(`li`);
@@ -13,8 +14,9 @@ export const show = (todo) => {
   newChkBox.setAttribute(`type`, `checkbox`);
   const newLabel = document.createElement(`label`);
   newLabel.setAttribute(`for`, todo.id);
-  newLabel.setAttribute(`class`, `tick js-tick`); //TODO Check classes!
+  newLabel.setAttribute(`class`, `tick js-tick`);
   const newTextArea = document.createElement(`textarea`);
+  newTextArea.setAttribute(`rows`, `1`);
   newTextArea.setAttribute(`class`, `liText`)
   newTextArea.value = todo.txt;
   newLabel.appendChild(newTextArea);
@@ -25,6 +27,7 @@ export const show = (todo) => {
   delIcon.setAttribute(`alt`, `Recycle bin icon`); //* A11Y FTW
   delBtn.appendChild(delIcon);
   const newBtn = document.createElement(`button`);
+  newBtn.setAttribute(`class`, `addBtn`);
   newBtn.textContent = `+`;
 
   listItem.appendChild(newChkBox);
@@ -33,6 +36,8 @@ export const show = (todo) => {
   listItem.appendChild(newBtn);
   list.appendChild(listItem);
   newTextArea.focus()
+  txtTrim(newTextArea);
+  txtResize(newTextArea);
 };
 
   // newTextArea.classList.add(`listItem`);
