@@ -15,7 +15,7 @@ export const show = (todo) => {
   newLabel.setAttribute(`for`, todo.id);
   newLabel.setAttribute(`class`, `tick js-tick`); //TODO Check classes!
   const newTextArea = document.createElement(`textarea`);
-  newTextArea.setAttribute(`class`, `listItem`)
+  newTextArea.setAttribute(`class`, `liText`)
   newTextArea.value = todo.txt;
   newLabel.appendChild(newTextArea);
   const delBtn = document.createElement(`button`);
