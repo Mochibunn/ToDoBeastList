@@ -1,6 +1,8 @@
-console.log(`Hello from create1.js! ENGINE REWORK IN PROGRESS`)
+console.log(`Hello from create1.js! ENGINE REWORK IN PROGRESS`);
 import { show } from "./update.js";
-let listItems = [];
+
+
+export let todoItems = [];
 
 
 export const addTodo = (txt) => {
@@ -9,34 +11,43 @@ export const addTodo = (txt) => {
     txt, checked:false, id: Date.now()
   };
 
-  listItems.push(todo);
+  todoItems.push(todo);
   show(todo);
 };
 
-const listContainer = document.querySelector(`.listContainer`);
 // console.log(`here's your listContainer!`);
-listContainer.firstChild.addEventListener("blur", (() => {
-  const input = document.querySelector(`.listItem`);
 
-  const trimmer = input.value.trim();
-  if (text !== ``) {
-    addTodo(txt);
-    input.value = ``;
-    input.focus();
+
+
+export const txtTrim = (e) => {
+  // const input = e.querySelector(``);
+  
+  e.addEventListener("blur", () => {
+    console.log(`Hello from the function!`);
+    const trimmed = e.value.trim();
+    localStorage.setItem(e.id, trimmed);
+    e.value = trimmed;
+  });
+};
+
+  // e.addEventListener("blur", (() => {
+  //   const trimmer = input.value.trim();
+  //   console.log(`Here's the trimmer!`);
+  //   console.log(trimmer);
+  //   if (text !== ``) {
+  //     addTodo(txt);
+  //     input.value = ``;
+  //     input.focus();
+  //   }
+  // }));
+
+window.addEventListener("load", (() => {
+  if (todoItems.length == 0) {
+    addTodo(``);
   }
 }));
 
-// window.addEventListener("load", (() => {
-//   if (condition) {
-//     addTodo();
-//   }
-// }));
 
-addTodo(``);
-
-
-
-// export { addTodo };
 
 class Create {
 
