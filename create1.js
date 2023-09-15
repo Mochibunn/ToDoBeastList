@@ -3,7 +3,7 @@ import { show } from "./update.js";
 let listItems = [];
 
 
-const addTodo = (txt) => {
+export const addTodo = (txt) => {
   console.log(`I'm inside of the "addTodo" const!`);
   const todo = {
     txt, checked:false, id: Date.now()
@@ -32,7 +32,11 @@ listContainer.firstChild.addEventListener("blur", (() => {
 //   }
 // }));
 
-addTodo(`Hello world!`);
+addTodo(``);
+
+
+
+// export { addTodo };
 
 class Create {
 

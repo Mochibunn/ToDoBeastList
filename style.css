@@ -6,7 +6,8 @@ ul, li {
   list-style: none;
 }
 li {
-  /* display: flex; */
+  display: flex;
+  flex-flow: wrap;
 }
 body {
   margin: 1% 10vw;

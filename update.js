@@ -15,6 +15,7 @@ export const show = (todo) => {
   newLabel.setAttribute(`for`, todo.id);
   newLabel.setAttribute(`class`, `tick js-tick`); //TODO Check classes!
   const newTextArea = document.createElement(`textarea`);
+  newTextArea.setAttribute(`class`, `listItem`)
   newTextArea.value = todo.txt;
   newLabel.appendChild(newTextArea);
   const delBtn = document.createElement(`button`);
@@ -30,7 +31,9 @@ export const show = (todo) => {
   listItem.appendChild(newLabel);
   listItem.appendChild(delBtn);
   listItem.appendChild(newBtn);
-  list.appendChild(listItem);    
+  list.appendChild(listItem);
+  newTextArea.focus()
+};
 
   // newTextArea.classList.add(`listItem`);
   // newTextArea.setAttribute(`id`, todo.id);
@@ -38,8 +41,7 @@ export const show = (todo) => {
   // newBtn.classList.add(`listBtn`);
   // listItem.appendChild(newTextArea);
   // listItem.appendChild(newBtn);
-};
-
+//? Disregard
 
 
 
