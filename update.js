@@ -4,7 +4,7 @@ import { deleteTodo } from "./delete.js";
 import { txtResize } from "./resize.js"; //Import a function that automatically resizes the text input area to fit more text
 
  //Select the UL tag
-export const renderTodo = (todo) => { //start of the function
+export const renderTodo = (todo, theId) => { //start of the function
   localStorage.setItem('todoItems', JSON.stringify(todoItems));
   const item = document.querySelector(`[data-key='${todo.id}']`);
   if (todo.deleted) {
@@ -20,9 +20,9 @@ export const renderTodo = (todo) => { //start of the function
     const newChkBox = document.createElement(`input`); //Create input
       newChkBox.setAttribute(`id`, todo.id); //Give it an ID
       newChkBox.setAttribute(`type`, `checkbox`); //Specify that it's a checkbox
-    const newLabel = document.createElement(`label`); //Create a label
+      newChkBox.setAttribute(`class`, `tick js-tick`); //Add a class
+    const newLabel = document.createElement(`div`); //Create a label
       newLabel.setAttribute(`for`, todo.id); //Specify that it's for the checkbox
-      newLabel.setAttribute(`class`, `tick js-tick`); //Add a class
         const newTextArea = document.createElement(`textarea`); //Create a textbox
         newTextArea.setAttribute(`rows`, `1`); //Make sure it's only 1 row high initially
         newTextArea.setAttribute(`class`, `liText`) //Add a class to it
@@ -43,17 +43,26 @@ export const renderTodo = (todo) => { //start of the function
       newBtn.setAttribute(`class`, `addBtn`); //Give it a class
       newBtn.textContent = `+`; //Make it a simple + icon
       newBtn.addEventListener("click", () => {
-        addTodo(``);
+        addTodo(``, todo.id);
       });
   
   node.appendChild(newChkBox); //Append the checkbox to the LI
   node.appendChild(newLabel); //Append the label with textbox ti the LI
   node.appendChild(delBtn); //Append the delete button to the LI
   node.appendChild(newBtn); //Append the new button to the LI
+
+
+  const position = list.querySelector(`[data-key='${todo.id}']`);
+  console.log(`Here is the list:`);
+  console.log(list);
+  console.log(`Here's the data key`);
+  console.log(todo.id);
+  console.log(position);
+
   list.appendChild(node); //Append the new LI to the UL
   newTextArea.focus() //Focus input on the newly created textbox
 
-  txtTrim(newLabel); //Add an event listener that trims user input
+  txtTrim(newTextArea); //Add an event listener that trims user input
   txtResize(newTextArea); //Add an event listener that automatically resizes the textbox vertically depending on the amount of text
   
   if (item) {
