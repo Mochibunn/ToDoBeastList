@@ -11,6 +11,9 @@ export const toggleDone = (key) => {
 list.addEventListener('click', event => {
   if (event.target.classList.contains('js-tick')) {
     const itemKey = event.target.parentElement.dataset.key;
+    console.log(`Here's the itemKey:`);
+    console.log(itemKey);
+
     toggleDone(itemKey);
   }
   

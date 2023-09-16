@@ -62,6 +62,10 @@ export const renderTodo = (todo, theId) => { //start of the function
   list.appendChild(node); //Append the new LI to the UL
   newTextArea.focus() //Focus input on the newly created textbox
 
+  document.addEventListener("blur", () => {
+    updateFunc;
+  });
+  
   txtTrim(newTextArea); //Add an event listener that trims user input
   txtResize(newTextArea); //Add an event listener that automatically resizes the textbox vertically depending on the amount of text
   
@@ -71,6 +75,11 @@ export const renderTodo = (todo, theId) => { //start of the function
     list.append(node);
   }
 };
+const updateFunc = () => {
+  const item = document.querySelector(`[data-key='${todo.id}']`);
+
+};
+
 
   // newTextArea.classList.add(`listItem`);
   // newTextArea.setAttribute(`id`, todo.id);
