@@ -1,16 +1,22 @@
-import { todoItems } from "./create1.js";
-import { show } from "./update.js";
+import { list, todoItems } from "./create1.js";
+import { deleteTodo } from "./delete.js";
+import { renderTodo } from "./update.js";
 
-export const list = document.querySelector(`.js-listContainer`);
-list.addEventListener("click", e => {
-  if (e.target.classList.contains(`js-tick`)) {
-    const itmKey = e.target.parentElement.dataset.key;
-    toggleDone(itmKey);
-  }
-});
-
-const toggleDone = (key) => {
+export const toggleDone = (key) => {
   const index = todoItems.findIndex(item => item.id === Number(key));
   todoItems[index].checked = !todoItems[index].checked;
-  show(todoItems[index]);
-};
+  renderTodo(todoItems[index]);
+}
+
+
+list.addEventListener('click', event => {
+  if (event.target.classList.contains('js-tick')) {
+    const itemKey = event.target.parentElement.dataset.key;
+    toggleDone(itemKey);
+  }
+  
+  if (event.target.classList.contains('js-delete-todo')) {
+    const itemKey = event.target.parentElement.dataset.key;
+    deleteTodo(itemKey);
+  }
+});

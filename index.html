@@ -13,25 +13,27 @@
     <input class="listTitle" id="listTitleInput" type="text" autocomplete="off" placeholder=""></input>
     <div id="decoration"></div>
   </header>
-  <ul class="listContainer js-listContainer" id="listContainer">
-    <!-- <li>
-      <input type="checkbox">
-      <textarea class="listItem" id="itm"></textarea>
-      <button class="listBtn">+</button>
+  <ul class="listContainer js-listContainer todo-list js-todo-list" id="listContainer">
+    <!-- <li class="todo-item " data-key="1694884934518">
+      <input id="1694884934518" type="checkbox">
+        <label for="1694884934518" class="tick js-tick">
+          <textarea rows="1" class="liText" style="height: 41px; overflow-y: hidden;></textarea>
+        </label>
+      <button class="delete-todo js-delete-todo">
+        <img src="./res/img/recycle.svg" alt="Recycle bin icon">
+      </button>
+      <button class="addBtn">+</button>
     </li> -->
   </ul>
 
 
 
-  <!-- <label for="checkboxx"><textarea name="txtareaa" id="idee" cols="30" rows="10"></textarea></label>
-  <input type="checkbox" name="checkboxx"> -->
-  
   <script type="module" src="./create1.js"></script>
-  <script type="module" src="./create.js"></script>
   <script type="module" src="./resize.js"></script>
   <script type="module" src="./title.js"></script>
   <script type="module" src="./index.js"></script>
   <script type="module" src="./update.js"></script>
   <script type="module" src="./complete.js"></script>
+  <script type="module" src="./delete.js"></script>
 </body>
 </html>

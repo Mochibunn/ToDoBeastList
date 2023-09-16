@@ -7,11 +7,11 @@ window.addEventListener("keydown", ((e) => {
     // prevent enter
     e.preventDefault();
     addTodo(``);
-    //alert("ok");
     return false;
     }
   })); // * Prevents Enter key from making a new line and calls a new textbox function
 //! Function allows for Shift + Enter to make a new line anyways, it's not a bug
+
 
 // const newLine = () => { // * New text input creator
 //   console.log(`New line coming right up!`);

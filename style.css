@@ -41,7 +41,7 @@ input[type=checkbox]{
   top: 0;
   padding: 12px 16px 12px 16px;
 }
-.checked {
+.done {
   text-decoration: line-through;
 }
 button {
@@ -55,7 +55,7 @@ button {
   resize: none;
   overflow: hidden;
 }
-.tick textarea {
+.js-tick textarea {
   /* display: flex;
   text-align: center;
   align-items: center; */
