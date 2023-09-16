@@ -9,30 +9,38 @@ export const show = (todo) => {
   const listItem = document.createElement(`li`);
   listItem.setAttribute(`class`, `listItem ${isChecked}`);
   listItem.setAttribute(`data-key`, todo.id);
+
   const newChkBox = document.createElement(`input`);
   newChkBox.setAttribute(`id`, todo.id);
   newChkBox.setAttribute(`type`, `checkbox`);
+
   const newLabel = document.createElement(`label`);
   newLabel.setAttribute(`for`, todo.id);
   newLabel.setAttribute(`class`, `tick js-tick`);
+
   const newTextArea = document.createElement(`textarea`);
   newTextArea.setAttribute(`rows`, `1`);
   newTextArea.setAttribute(`class`, `liText`)
+  
   newTextArea.value = todo.txt;
   newLabel.appendChild(newTextArea);
+
   const delBtn = document.createElement(`button`);
   delBtn.setAttribute(`class`, `delete-item js-delete-item`); //! Check!
   const delIcon = document.createElement(`img`);
   delIcon.setAttribute(`src`, `./res/img/recycle.svg`);
   delIcon.setAttribute(`alt`, `Recycle bin icon`); //* A11Y FTW
   delBtn.appendChild(delIcon);
+
+
   const newBtn = document.createElement(`button`);
   newBtn.setAttribute(`class`, `addBtn`);
   newBtn.textContent = `+`;
 
   listItem.appendChild(newChkBox);
   listItem.appendChild(newLabel);
-  listItem.appendChild(delBtn);
+  delButParent= listItem.appendChild(delBtn);
+
   listItem.appendChild(newBtn);
   list.appendChild(listItem);
   newTextArea.focus()
