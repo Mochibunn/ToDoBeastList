@@ -5,11 +5,11 @@ export let todoItems = [];
 export const setTodoItems = (value) => {
   todoItems = value;
 }; 
-
 export const list = document.querySelector('.js-todo-list');
 
 
-export const addTodo = (text) => {
+
+export const addTodo = (text, theId) => {
   const todo = {
     text,
     checked:false,
@@ -17,20 +17,28 @@ export const addTodo = (text) => {
   };
 
   todoItems.push(todo);
-  renderTodo(todo);
+  renderTodo(todo, theId);
 };
 
 export const txtTrim = (e) => {
-  e.addEventListener("blur", () => {
-    console.log(`Text area lost focus!`);
-
-
-    const trimmed = e.value.trim();
-    localStorage.setItem(e.id, trimmed);
-    e.value = trimmed;
+  const trim = () => {const trimmed = e.value.trim();
+  localStorage.setItem(e.id, trimmed);
+  e.value = trimmed;
+  };
+  e.addEventListener("click", () => {
+    trim;
   });
 };
 
+document.addEventListener('DOMContentLoaded', () => {
+  const ref = localStorage.getItem('todoItems');
+  if (ref) {
+    todoItems = JSON.parse(ref);
+    todoItems.forEach(t => {
+      renderTodo(t);
+    });
+  }
+});
 
 // const form = document.querySelector('.js-form');
 // form.addEventListener('submit', event => {
@@ -47,8 +55,8 @@ export const txtTrim = (e) => {
 
 
 window.addEventListener("load", (() => {
-  if (todoItems.length == 0) {
-    addTodo(``);
+  if (todoItems.length === 0) {
+    addTodo(`Start typing here..`);
   }
 }));
 

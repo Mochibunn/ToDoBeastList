@@ -8,7 +8,6 @@ export const toggleDone = (key) => {
   renderTodo(todoItems[index]);
 }
 
-
 list.addEventListener('click', event => {
   if (event.target.classList.contains('js-tick')) {
     const itemKey = event.target.parentElement.dataset.key;
