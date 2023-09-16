@@ -5,8 +5,8 @@ export let todoItems = [];
 export const setTodoItems = (value) => {
   todoItems = value;
 }; 
-
 export const list = document.querySelector('.js-todo-list');
+
 
 
 export const addTodo = (text) => {
@@ -47,8 +47,8 @@ export const txtTrim = (e) => {
 
 
 window.addEventListener("load", (() => {
-  if (todoItems.length == 0) {
-    addTodo(``);
+  if (todoItems.length === 0) {
+    addTodo(`Start typing here..`);
   }
 }));
 

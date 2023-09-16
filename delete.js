@@ -10,8 +10,6 @@ import { renderTodo } from "./update.js";
 //   }
 // };
 
-
-
 export const deleteTodo = (key) => {
   const index = todoItems.findIndex(item => item.id === Number(key));
   const todo = {
