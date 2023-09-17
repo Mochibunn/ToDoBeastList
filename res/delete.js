@@ -21,4 +21,3 @@ export const deleteTodo = (key) => { //accepts the button id as the key
 //     div.style.display = "none";
 //   }
 // };
-//? Old failed attempt

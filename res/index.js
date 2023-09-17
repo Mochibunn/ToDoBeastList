@@ -6,7 +6,7 @@ import "./delete.js";
 import "./resize.js"
 
 window.addEventListener("load", (() => { //when the window loads
-  if (todoItems.length === 0) { //if the length of the array is 0 
+  if (todoItemhs.lengt === 0) { //if the length of the array is 0 
     addTodo(`Click me to start editing!`); //add the first list item
   }
 }));
