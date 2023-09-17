@@ -1,15 +1,8 @@
 console.log(`Hello from resize.js!`);
 
-
-
-// const txtarea = document.querySelectorAll(".listItem");
-
-export const txtResize = (e) => {
-  console.log(`Hello from textResize!`);
-  // for (let i = 0; i < e.length; i++) {
-    e.setAttribute("style", "height:" + (e.scrollHeight) + "px;overflow-y:hidden;");
-    e.addEventListener("input", OnInput, false);
-  // };
+export const txtResize = (e) => { //function that automatically resizes the list item depending on the amount of text, accepts element
+  e.setAttribute("style", "height:" + (e.scrollHeight) + "px;overflow-y:hidden;");
+  e.addEventListener("input", OnInput, false);
 };
 
 function OnInput() {
