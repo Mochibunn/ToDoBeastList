@@ -17,14 +17,6 @@ document.addEventListener('DOMContentLoaded', () => { //when the entire DOM load
     });
   }
 });
-// window.addEventListener("keydown", (e => { //when the "Enter" key is hit
-//   if (e.key === "Enter" && !e.shiftKey) {
-//     // prevent enter
-//     e.preventDefault();
-//     addTodo(``);
-//     return false;
-//   }
-// })); // Prevents Enter key from making a new line and calls a new textbox function.
 
 
 

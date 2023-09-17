@@ -3,12 +3,12 @@ import { addTodo, list, setTodoItems, setTodoItemsIndex, todoItems, txtTrim } fr
 import { deleteTodo } from "./delete.js";
 import { txtResize } from "./resize.js"; //Import a function that automatically resizes the text input area to fit more text
 
- //Select the UL tag
-export const renderTodo = (todo, theId) => { //start of the function
-  // localStorage.setItem('todoItems', JSON.stringify(todoItems));
-  const item = document.querySelector(`[data-key='${todo.id}']`);
-  if (todo.deleted) {
-    item.remove();
+
+export const renderTodo = (todo, mid) => { //start of the function
+  const item = document.querySelector(`[data-key='${todo.id}']`); //select the LI tag with the corresponding ID inside of the DOM
+  if (todo.deleted) { //if it's marked for deletion
+    item.remove(); //remove the LI tag
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
     if (todoItems.length === 0) addTodo(``);
     return
   };
@@ -32,7 +32,6 @@ export const renderTodo = (todo, theId) => { //start of the function
       delBtn.setAttribute(`class`, `delete-todo js-delete-todo`); //Give it classes
       delBtn.setAttribute(`id`, todo.id);
       delBtn.addEventListener("click", () => {
-    console.log(`The delete button has been clicked! This is the id: ${delBtn.id}`);
     const btnId = delBtn.id;
       deleteTodo(btnId)});
         const delIcon = document.createElement(`img`); //Add an SVG image
@@ -42,15 +41,26 @@ export const renderTodo = (todo, theId) => { //start of the function
     const newBtn = document.createElement(`button`); //Create a new button
       newBtn.setAttribute(`class`, `addBtn`); //Give it a class
       newBtn.textContent = `+`; //Make it a simple + icon
-      newBtn.addEventListener("click", () => {
-        addTodo(``, todo.id);
-      });
-  
+      newBtn.addEventListener("click", () => { midInsert(todo) });
+
   node.appendChild(newChkBox); //Append the checkbox to the LI
   node.appendChild(newLabel); //Append the label with textbox ti the LI
   node.appendChild(delBtn); //Append the delete button to the LI
   node.appendChild(newBtn); //Append the new button to the LI
+  newTextArea.focus() //focus input on the newly created textbox
+  if (typeof mid === `number`) {
+    const prevItm = list.querySelector(`[data-key='${mid}']`);
+    console.log(`Hehe, is this your item ma'am?`)
+    console.log(prevItm);
+    prevItm.after(node);
+    return;
+  } //! Fix me! 
+  list.appendChild(node); //append the new LI to the UL
 
+  txtTrim(newTextArea); //add an event listener that trims user input
+  txtUpdate(newTextArea, todo);//dd an event listener that updates the memory
+  txtResize(newTextArea); //add an event listener that automatically resizes the textbox vertically depending on the amount of text
+  enterPreventer(newTextArea, todo);
 
   // const position = list.querySelector(`[data-key='${todo.id}']`);
   // console.log(`Here is the list:`);
@@ -60,13 +70,6 @@ export const renderTodo = (todo, theId) => { //start of the function
   // console.log(position);
   // TODO See if you can figure out how to add item at current position
 
-
-  newTextArea.focus() //focus input on the newly created textbox
-  list.appendChild(node); //append the new LI to the UL
-  txtTrim(newTextArea); //add an event listener that trims user input
-  txtUpdate(newTextArea, todo);//ass an event listener that updates the memory
-  txtResize(newTextArea); //add an event listener that automatically resizes the textbox vertically depending on the amount of text
-  enterPreventer(newTextArea);
   if (item) {
     list.replaceChild(node, item);
   } else {
@@ -93,20 +96,34 @@ export const renderTodo = (todo, theId) => { //start of the function
   });
   };
 
+  const midInsert = (todo) => {
+      const element = {
+        text: ``,
+        checked:false,
+        id: Date.now(),
+      };
+      const index = todoItems.findIndex(item => item.id === todo.id) + 1;
+      const splicer = todoItems.splice(index, 0, element);
+      console.log(splicer);
+      const mid = todo.id;
+      renderTodo(element, mid);
+      // setTodoItems(splicer);
+      // renderTodo(element);
+  };
 
-  const enterPreventer = (e) => {
+  const enterPreventer = (e, todo) => {
     e.addEventListener("keydown", (e => { //when the "Enter" key is hit
         if (e.key === "Enter" && !e.shiftKey) {
           // prevent enter
           e.preventDefault();
-          addTodo(``);
+          midInsert(todo);
           return false;
         }
       }));
   };
 
 
-//! Line 86: Inside on the array, find the index of the first item that matches the following criteria:
+//! Line 85: Inside on the array, find the index of the first item that matches the following criteria:
 
 //! Each object inside of the array gets passed as the argument for the "item" parameter
 //! If the id of the item (ID of the object at index "i") matches the id of the current object (and thus, the new object), execute the following ..
