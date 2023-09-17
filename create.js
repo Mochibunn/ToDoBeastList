@@ -20,11 +20,12 @@ export const addTodo = (text) => {
 };
 
 export const txtTrim = (e) => {
-  const trim = () => {const trimmed = e.value.trim();
-  localStorage.setItem(e.id, trimmed);
-  e.value = trimmed;
-  };
-  e.addEventListener("click", () => {
-    trim;
+  e.addEventListener("blur", () => {
+    e.value = e.value.trim();
   });
 };
+
+// const trim = () => {const trimmed = e.value.trim();
+//   localStorage.setItem(e.id, trimmed);
+//   e.value = trimmed;
+//   };

@@ -27,7 +27,7 @@ export const renderTodo = (todo, mid) => { //start of the function
         const newTextArea = document.createElement(`textarea`); //Create a textbox
         newTextArea.setAttribute(`rows`, `1`); //Make sure it's only 1 row high initially
         newTextArea.setAttribute(`class`, `liText`) //Add a class to it
-        newTextArea.value = todo.text; //Fill in the value with saved data
+        newTextArea.value = todo.text.trim(); //Fill in the value with saved data
       newLabel.appendChild(newTextArea); //Append the textbox to the checkbox
     const delBtn = document.createElement(`button`); //Create a new button
       delBtn.setAttribute(`class`, `delete-todo js-delete-todo`); //Give it classes
@@ -46,8 +46,8 @@ export const renderTodo = (todo, mid) => { //start of the function
 
   node.appendChild(newChkBox); //Append the checkbox to the LI
   node.appendChild(newLabel); //Append the label with textbox ti the LI
-  node.appendChild(delBtn); //Append the delete button to the LI
   node.appendChild(newBtn); //Append the new button to the LI
+  node.appendChild(delBtn); //Append the delete button to the LI
   newTextArea.focus() //focus input on the newly created textbox
   if (typeof mid === `number`) {
     const prevItm = list.querySelector(`[data-key='${mid}']`);
@@ -127,7 +127,7 @@ export const renderTodo = (todo, mid) => { //start of the function
   };
 
 
-//! Line 90: Inside on the array, find the index of the first item that matches the following criteria:
+//! Line 112: Inside on the array, find the index of the first item that matches the following criteria:
 
 //! Each object inside of the array gets passed as the argument for the "item" parameter
 //! If the id of the item (ID of the object at index "i") matches the id of the current object (and thus, the new object), execute the following ..

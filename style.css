@@ -45,7 +45,6 @@ input[type=checkbox]{
   width: 30px;
   height: 30px;
   border: 3px solid #333;
-  border-radius: 50%;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -54,7 +53,7 @@ input[type=checkbox]{
 
 .tick::before {
   content: '✓';
-  font-size: 20px;
+  font-size: 0.25em;
   display: none;
 }
 
@@ -69,17 +68,12 @@ button {
   border: none;
   font-size: 2em;
   font-weight: bold;
+  width: 40px;
 }
 .liText {
   font-family: Arial, Helvetica, sans-serif;
   resize: none;
   overflow: hidden;
-}
-.js-tick textarea {
-  /* display: flex;
-  text-align: center;
-  align-items: center; */
-  /* text-decoration: line-through; */
 }
 #decoration {
   border-bottom: 1px solid #111;
