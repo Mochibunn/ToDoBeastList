@@ -2,9 +2,10 @@ console.log(`Hello from create1.js! ENGINE REWORK IN PROGRESS`);
 import { renderTodo } from "./update.js";
 
 export let todoItems = [];
-export const setTodoItems = (value) => {
-  todoItems = value;
+export const setTodoItems = (value, index) => {
+  todoItems[index] = value;
 }; 
+
 export const list = document.querySelector('.js-todo-list');
 
 
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener("load", (() => {
   if (todoItems.length === 0) {
-    addTodo(`Start typing here..`);
+    addTodo(`Uneditable`);
   }
 }));
 

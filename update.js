@@ -67,15 +67,25 @@ export const renderTodo = (todo, theId) => { //start of the function
 
   newTextArea.addEventListener("keyup", () => {
     const itemLi = document.querySelector(`[data-key='${todo.id}']`);
+    
     const txtArea = itemLi.querySelector(`textarea`);
+    console.log(`keyUp function! Todo id: ${todo.id}`);
+    console.log(txtArea.value);
     const text = txtArea.value;
     const updateObj = {
       text,
       checked: todo.checked,
       id: todo.id,
     };
-    // TODO Add a function to splice the array and replace the object data with new object data
-    //? Perhaps the array.splice() method might be the answer
+
+    const index = todoItems.findIndex(item => item.id === todo.id);
+
+    if (index !== -1) {
+      // Object with the specified ID found, replace it with updateObj
+      
+      setTodoItems(updateObj, index);
+    };
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
   });
   
   txtResize(newTextArea); //Add an event listener that automatically resizes the textbox vertically depending on the amount of text
@@ -99,12 +109,6 @@ export const renderTodo = (todo, theId) => { //start of the function
   // listItem.appendChild(newTextArea);
   // listItem.appendChild(newBtn);
 //? Disregard
-
-
-
-
-
-
 
 
 // setTimeout(()=> {
