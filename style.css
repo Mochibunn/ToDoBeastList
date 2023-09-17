@@ -34,6 +34,9 @@ input[type=checkbox]{
   accent-color: #000000; 
   width: fit-content; 
   margin: auto 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  transition-delay: 0.2s;
 }
 
 button {
@@ -44,14 +47,16 @@ button {
     width: 40px;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+    transition-delay: 0.2s;
 }
-button:hover {
+li:hover > button{
   opacity: 1;
+  transition-delay: 0s;
 }
-li:hover > button:hover {
+li:hover > input[type=checkbox]{
   opacity: 1;
+  transition-delay: 0s;
 }
-
 /* input[type=checkbox]:hover button:hover{} */
 .tick {
   width: 30px;
