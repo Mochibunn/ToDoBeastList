@@ -1,5 +1,5 @@
 console.log(`Hello from update.js! ENGINE REWORK IN PROGRESS`); //!Debug
-import { addTodo, list, todoItems, txtTrim } from "./create1.js"; //Import data array and text trimming functions
+import { addTodo, list, setTodoItems, todoItems, txtTrim } from "./create1.js"; //Import data array and text trimming functions
 import { deleteTodo } from "./delete.js";
 import { txtResize } from "./resize.js"; //Import a function that automatically resizes the text input area to fit more text
 
@@ -52,17 +52,32 @@ export const renderTodo = (todo, theId) => { //start of the function
   node.appendChild(newBtn); //Append the new button to the LI
 
 
-  const position = list.querySelector(`[data-key='${todo.id}']`);
-  console.log(`Here is the list:`);
-  console.log(list);
-  console.log(`Here's the data key`);
-  console.log(todo.id);
-  console.log(position);
+  // const position = list.querySelector(`[data-key='${todo.id}']`);
+  // console.log(`Here is the list:`);
+  // console.log(list);
+  // console.log(`Here's the data key`);
+  // console.log(todo.id);
+  // console.log(position);
+  // TODO See if you can figure out how to add item at current position
+
 
   list.appendChild(node); //Append the new LI to the UL
   newTextArea.focus() //Focus input on the newly created textbox
-
   txtTrim(newTextArea); //Add an event listener that trims user input
+
+  newTextArea.addEventListener("keyup", () => {
+    const itemLi = document.querySelector(`[data-key='${todo.id}']`);
+    const txtArea = itemLi.querySelector(`textarea`);
+    const text = txtArea.value;
+    const updateObj = {
+      text,
+      checked: todo.checked,
+      id: todo.id,
+    };
+    // TODO Add a function to splice the array and replace the object data with new object data
+    //? Perhaps the array.splice() method might be the answer
+  });
+  
   txtResize(newTextArea); //Add an event listener that automatically resizes the textbox vertically depending on the amount of text
   
   if (item) {
@@ -71,6 +86,11 @@ export const renderTodo = (todo, theId) => { //start of the function
     list.append(node);
   }
 };
+
+
+
+// const updateFunc = () => {
+// };
 
   // newTextArea.classList.add(`listItem`);
   // newTextArea.setAttribute(`id`, todo.id);

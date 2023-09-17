@@ -9,7 +9,7 @@ export const list = document.querySelector('.js-todo-list');
 
 
 
-export const addTodo = (text, theId) => {
+export const addTodo = (text, theId) => { //! "theId" isn't used yet, it's for the attempt at making mid-list adds
   const todo = {
     text,
     checked:false,
