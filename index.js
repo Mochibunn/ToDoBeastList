@@ -5,7 +5,7 @@ import { todoItems, addTodo, setTodoItems } from "./create.js"; //import variabl
 
 window.addEventListener("load", (() => { //when the window loads
   if (todoItems.length === 0) { //if the length of the array is 0 
-    addTodo(``); //add the first list item
+    addTodo(`Click me to start editing!`); //add the first list item
   }
 }));
 document.addEventListener('DOMContentLoaded', () => { //when the entire DOM loads 
@@ -17,14 +17,6 @@ document.addEventListener('DOMContentLoaded', () => { //when the entire DOM load
     });
   }
 });
-// window.addEventListener("keydown", (e => { //when the "Enter" key is hit
-//   if (e.key === "Enter" && !e.shiftKey) {
-//     // prevent enter
-//     e.preventDefault();
-//     addTodo(``);
-//     return false;
-//   }
-// })); // Prevents Enter key from making a new line and calls a new textbox function.
 
 
 
