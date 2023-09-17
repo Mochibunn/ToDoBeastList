@@ -1,7 +1,9 @@
 import { renderTodo } from "./update.js"; //import variables
 import { todoItems, addTodo, setTodoItems } from "./create.js"; //import variables
-
-
+import "./title.js";
+import "./complete.js";
+import "./delete.js";
+import "./resize.js"
 
 window.addEventListener("load", (() => { //when the window loads
   if (todoItems.length === 0) { //if the length of the array is 0 

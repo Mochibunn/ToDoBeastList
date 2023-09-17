@@ -13,4 +13,4 @@ function OnInput() {
 // for (let i = 0; i < e.length; i++) {
 //   e[i].setAttribute("style", "height:" + (txtarea[i].scrollHeight) + "px;overflow-y:hidden;");
 //   e[i].addEventListener("input", OnInput, false);
-
+//? Old failed attempt

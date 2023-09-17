@@ -29,3 +29,4 @@ export const txtTrim = (e) => {
 //   localStorage.setItem(e.id, trimmed);
 //   e.value = trimmed;
 //   };
+//? Old failed attempt

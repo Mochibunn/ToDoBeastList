@@ -1,7 +1,7 @@
 console.log(`Hello from update.js!`); //!Debug
-import { addTodo, list, setTodoItems, setTodoItemsIndex, todoItems, txtTrim } from "./create.js"; //Import data array and text trimming functions
-import { deleteTodo } from "./delete.js";
-import { txtResize } from "./resize.js"; //Import a function that automatically resizes the text input area to fit more text
+import { addTodo, list, setTodoItems, setTodoItemsIndex, todoItems, txtTrim } from "./create.js"; //import data array and text trimming functions
+import { deleteTodo } from "./delete.js"; //import a function that does the deleting work
+import { txtResize } from "./resize.js"; //import a function that automatically resizes the text input area to fit more text
 
 
 export const renderTodo = (todo, mid) => { //start of the function
@@ -9,12 +9,12 @@ export const renderTodo = (todo, mid) => { //start of the function
   const item = document.querySelector(`[data-key='${todo.id}']`); //select the LI tag with the corresponding ID inside of the DOM
   if (todo.deleted) { //if it's marked for deletion
     item.remove(); //remove the LI tag
-    localStorage.setItem('todoItems', JSON.stringify(todoItems));
-    if (todoItems.length === 0) addTodo(``);
-    return
+    localStorage.setItem('todoItems', JSON.stringify(todoItems)); //commit change to memory
+    if (todoItems.length === 0) addTodo(``); //if the item.remove() removes the last list item, add a new blank one
+    return; //end function execution
   };
 
-  const isChecked = todo.checked ? `done` : ``;
+  const isChecked = todo.checked ? `done` : ``; //(see below)
   const node = document.createElement(`li`); //Create a list element
     node.setAttribute(`class`, `todo-item ${isChecked}`); //Add a class
     node.setAttribute(`data-key`, todo.id); //Add a special data- attribute
@@ -31,10 +31,10 @@ export const renderTodo = (todo, mid) => { //start of the function
       newLabel.appendChild(newTextArea); //Append the textbox to the checkbox
     const delBtn = document.createElement(`button`); //Create a new button
       delBtn.setAttribute(`class`, `delete-todo js-delete-todo`); //Give it classes
-      delBtn.setAttribute(`id`, todo.id);
-      delBtn.addEventListener("click", () => {
-    const btnId = delBtn.id;
-      deleteTodo(btnId)});
+      delBtn.setAttribute(`id`, todo.id); //give it an id of the current object
+      delBtn.addEventListener("click", () => { //listen for clicks on the button
+    const btnId = delBtn.id; //record the id of the button
+      deleteTodo(btnId)}); //execute the delete function and pass the id of the button as the argument
         const delIcon = document.createElement(`img`); //Add an SVG image
           delIcon.setAttribute(`src`, `./res/img/recycle.svg`); //Location of the image
           delIcon.setAttribute(`alt`, `Recycle bin icon`); //* A11Y FTW, add alt text for a better a11y score
@@ -49,38 +49,28 @@ export const renderTodo = (todo, mid) => { //start of the function
   node.appendChild(newBtn); //Append the new button to the LI
   node.appendChild(delBtn); //Append the delete button to the LI
   newTextArea.focus() //focus input on the newly created textbox
-  if (typeof mid === `number`) {
-    const prevItm = list.querySelector(`[data-key='${mid}']`);
-    console.log(`Hehe, is this your item ma'am?`)
-    console.log(prevItm);
-    prevItm.after(node);
+  if (typeof mid === `number`) { //if the type of the "mid" argument is a number ..
+    const prevItm = list.querySelector(`[data-key='${mid}']`); //.. select the current <li>
+    prevItm.after(node); //add a new <li> after the current one
 
-    txtTrim(newTextArea);
-    txtUpdate(newTextArea, todo);
-    txtResize(newTextArea);
-    enterPreventer(newTextArea, todo);
-    newTextArea.focus();
-    return;
-  }
+    txtTrim(newTextArea); //(line 65)
+    txtUpdate(newTextArea, todo); //(line 66)
+    txtResize(newTextArea); //(line 67)
+    enterPreventer(newTextArea, todo); //(line 68)
+    newTextArea.focus(); //(automatically switch cursor to the new <li>)
+    return; //stop the execution of this function
+  } //if the "mid" argument is not a number, execute this
   list.appendChild(node); //append the new LI to the UL
 
   txtTrim(newTextArea); //add an event listener that trims user input
   txtUpdate(newTextArea, todo);//dd an event listener that updates the memory
   txtResize(newTextArea); //add an event listener that automatically resizes the textbox vertically depending on the amount of text
-  enterPreventer(newTextArea, todo);
+  enterPreventer(newTextArea, todo); //add an event listener that prevents the default Enter behavior inside of a textarea and executes a new line add
 
-  // const position = list.querySelector(`[data-key='${todo.id}']`);
-  // console.log(`Here is the list:`);
-  // console.log(list);
-  // console.log(`Here's the data key`);
-  // console.log(todo.id);
-  // console.log(position);
-  // TODO See if you can figure out how to add item at current position
-
-  if (item) {
-    list.replaceChild(node, item);
-  } else {
-    list.append(node);
+  if (item) { //if item exists in the DOM ..
+    list.replaceChild(node, item); //.. replace it
+  } else { //otherwise ..
+    list.append(node); //.. append the item to the end of the list
   }
 };
 
@@ -103,31 +93,32 @@ export const renderTodo = (todo, mid) => { //start of the function
   });
   };
 
-  const midInsert = (todo) => {
-      const element = {
+  const midInsert = (todo) => { //accepts the current object as the argument
+      const element = { //new element template
         text: ``,
         checked:false,
         id: Date.now(),
       };
-      const index = todoItems.findIndex(item => item.id === todo.id) + 1;
-      const splicer = todoItems.splice(index, 0, element);
-      const mid = todo.id;
-      renderTodo(element, mid);
+      const index = todoItems.findIndex(item => item.id === todo.id) + 1; //find the index of the current  object and focus on the next one
+      todoItems.splice(index, 0, element); //cut the array at the index and insert the new element template
+      const mid = todo.id; //id of the current <li> tag
+      renderTodo(element, mid); //run the big scary function, "mid" has a number so it will execute a condition on line 
   };
 
-  const enterPreventer = (e, todo) => {
-    e.addEventListener("keydown", (e => { //when the "Enter" key is hit
-        if (e.key === "Enter" && !e.shiftKey) {
-          // prevent enter
-          e.preventDefault();
-          midInsert(todo);
-          return false;
+  const enterPreventer = (e, todo) => { //accepts the element and the current object as the arguments
+    e.addEventListener("keydown", (e => { //listen to any keystroke
+        if (e.key === "Enter" && !e.shiftKey) { //if it happens to be the Enter key (but not if Shift + Enter)
+          e.preventDefault(); //prevent the default behavior
+          midInsert(todo); //execute the "midInsert" function (line 96)
+          return false; //stop executing function 
         }
       }));
   };
 
 
-//! Line 112: Inside on the array, find the index of the first item that matches the following criteria:
+//! Line 17: This ternary operator checks whether the object's "checked" key value is set to true or false. If it's true, the <li> tags gets a ".done" class which applies the CSS effect to cross out the text. If false, it removes the aforementioned class and the styling.
+
+//! Line 87: Inside on the array, find the index of the first item that matches the following criteria:
 
 //! Each object inside of the array gets passed as the argument for the "item" parameter
 //! If the id of the item (ID of the object at index "i") matches the id of the current object (and thus, the new object), execute the following ..
@@ -141,11 +132,11 @@ export const renderTodo = (todo, mid) => { //start of the function
   // newBtn.classList.add(`listBtn`);
   // listItem.appendChild(newTextArea);
   // listItem.appendChild(newBtn);
-//? Disregard
+//? Old failed attempt
 
 
 // setTimeout(()=> {
-//   const listTrack = document.querySelectorAll(".listItem"); //! There is an error here!
+//   const listTrack = document.querySelectorAll(".listItem");
 // console.log(`Your listTrack clg from update.js:`);
 // console.log(listTrack);
 
@@ -161,3 +152,4 @@ export const renderTodo = (todo, mid) => { //start of the function
 //   });
 // });
 // }, 1000);
+//? Old failed attempt
