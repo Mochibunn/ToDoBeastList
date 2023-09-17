@@ -1,81 +1,30 @@
-console.log(`Hello from create.js!`)
-import { addTodo } from "./create1.js";
-const list = document.querySelector(`#listContainer`);
+console.log(`Hello from create.js!`);
+import { renderTodo } from "./update.js";
 
-window.addEventListener("keydown", ((e) => {
-  if (e.key === "Enter" && !e.shiftKey) {
-    // prevent enter
-    e.preventDefault();
-    addTodo(``);
-    return false;
-    }
-  })); // * Prevents Enter key from making a new line and calls a new textbox function
-//! Function allows for Shift + Enter to make a new line anyways, it's not a bug
+export let todoItems = [];
+export const setTodoItems = (value) => {todoItems = value;}; 
+export const setTodoItemsIndex = (value, index) => {todoItems[index] = value;}; 
+export const list = document.querySelector('.js-todo-list');
 
 
-// const newLine = () => { // * New text input creator
-//   console.log(`New line coming right up!`);
 
-//   const curDate = Date.now();
-//   const newListItem = document.createElement(`li`);
-//   const newTextArea = document.createElement(`textarea`);
-//   const newBtn = document.createElement(`button`);
-//   newTextArea.classList.add(`listItem`);
-//   const o = newTextArea.setAttribute(`id`, `itm` + curDate);
-//   localStorage.setItem(`itm` + curDate, ``);
-//   newBtn.classList.add(`listBtn`);
-//   newBtn.textContent = `+`;
-//   newListItem.appendChild(newTextArea);
-//   newListItem.appendChild(newBtn);
-//   list.appendChild(newListItem);
-//   newTextArea.focus();
-//   console.log(newTextArea)
-// };
+export const addTodo = (text, theId) => { //! "theId" isn't used yet, it's for the attempt at making mid-list adds
+  const todo = {
+    text,
+    checked:false,
+    id: Date.now(),
+  };
 
-// window.addEventListener("load", () => { //* Load items from memory
-//   console.log(`Your code is working!`);
-//   const listIds = Object.keys(localStorage);
-//   const result = listIds.filter(nameCheck);
-//   function nameCheck(name) {
-//     if  (name.includes(`itm`) == true) {
-//       return name;
-//     }
-//     return;
-//   }
-//   console.log(`Results are here!:`);
-//   console.log(result);
+  todoItems.push(todo);
+  renderTodo(todo, theId);
+};
 
-//   if (result.length !== 0) {
-//   result.forEach(element => {
-//     const a = localStorage.getItem(element)
-//     const newListItem = document.createElement(`li`);
-//     const newTextArea = document.createElement(`textarea`);
-//     const newBtn = document.createElement(`button`);
-//     newTextArea.classList.add(`listItem`);
-//     newTextArea.setAttribute(`id`, element);
-//     newTextArea.value = (a);
-//     newBtn.classList.add(`listBtn`);
-//     newBtn.textContent = `+`;
-//     newListItem.appendChild(newTextArea);
-//     newListItem.appendChild(newBtn);
-//     list.appendChild(newListItem);    
-    
-//     console.log(`your a:`);
-//     console.log(a);
-//   })
-//   return;
-// };
-// newLine();
-// });
-
-// setTimeout(()=> {
-// const listBtn = document.querySelector(`.listBtn`); //* Button to add new
-// listBtn.addEventListener(`click`, () => {newLine()}); //* textarea
-// }, 1000);
-
-// const newLine = () => {
-//   let i = document.getElementsByClassName("listItem").length - 1;
-//   console.log("This is i: " + i);
-//   const newInput = document.getElementById("listItem" + i);
-// };
-//! Disregard
+export const txtTrim = (e) => {
+  const trim = () => {const trimmed = e.value.trim();
+  localStorage.setItem(e.id, trimmed);
+  e.value = trimmed;
+  };
+  e.addEventListener("click", () => {
+    trim;
+  });
+};

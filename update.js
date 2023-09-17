@@ -1,11 +1,11 @@
-console.log(`Hello from update.js! ENGINE REWORK IN PROGRESS`); //!Debug
-import { addTodo, list, setTodoItems, todoItems, txtTrim } from "./create1.js"; //Import data array and text trimming functions
+console.log(`Hello from update.js!`); //!Debug
+import { addTodo, list, setTodoItems, setTodoItemsIndex, todoItems, txtTrim } from "./create.js"; //Import data array and text trimming functions
 import { deleteTodo } from "./delete.js";
 import { txtResize } from "./resize.js"; //Import a function that automatically resizes the text input area to fit more text
 
  //Select the UL tag
 export const renderTodo = (todo, theId) => { //start of the function
-  localStorage.setItem('todoItems', JSON.stringify(todoItems));
+  // localStorage.setItem('todoItems', JSON.stringify(todoItems));
   const item = document.querySelector(`[data-key='${todo.id}']`);
   if (todo.deleted) {
     item.remove();
@@ -61,25 +61,12 @@ export const renderTodo = (todo, theId) => { //start of the function
   // TODO See if you can figure out how to add item at current position
 
 
-  list.appendChild(node); //Append the new LI to the UL
-  newTextArea.focus() //Focus input on the newly created textbox
-  txtTrim(newTextArea); //Add an event listener that trims user input
-
-  newTextArea.addEventListener("keyup", () => {
-    const itemLi = document.querySelector(`[data-key='${todo.id}']`);
-    const txtArea = itemLi.querySelector(`textarea`);
-    const text = txtArea.value;
-    const updateObj = {
-      text,
-      checked: todo.checked,
-      id: todo.id,
-    };
-    // TODO Add a function to splice the array and replace the object data with new object data
-    //? Perhaps the array.splice() method might be the answer
-  });
-  
-  txtResize(newTextArea); //Add an event listener that automatically resizes the textbox vertically depending on the amount of text
-  
+  newTextArea.focus() //focus input on the newly created textbox
+  list.appendChild(node); //append the new LI to the UL
+  txtTrim(newTextArea); //add an event listener that trims user input
+  txtUpdate(newTextArea, todo);//ass an event listener that updates the memory
+  txtResize(newTextArea); //add an event listener that automatically resizes the textbox vertically depending on the amount of text
+  enterPreventer(newTextArea);
   if (item) {
     list.replaceChild(node, item);
   } else {
@@ -87,7 +74,42 @@ export const renderTodo = (todo, theId) => { //start of the function
   }
 };
 
+  const txtUpdate = (e, todo) => { //function that accepts the element and current object as its arguments
+  e.addEventListener("keyup", () => { //while we're in this function, add an event listener that listens to every keypress on this specific user input field
+    const itemLi = document.querySelector(`[data-key='${todo.id}']`);//grab the LI element with the correct ID
+    const txtArea = itemLi.querySelector(`textarea`); //focus on the textarea inside of the LI element
+    const text = txtArea.value; //set this variable to always equal to what the user has put into the textarea
+    const updateObj = { //create a new object
+      text, //append the text from the text const
+      checked: todo.checked, //append the current status of the checkbox to the new object
+      id: todo.id, //append the current object ID to the new object so that it can replace the original object
+    };
+    const index = todoItems.findIndex(item => item.id === todo.id); //find the index of the object with the current ID (see below)
+    if (index !== -1) { //If index is not -1 aka if index is found
+      setTodoItemsIndex(updateObj, index); //pass that index along with the new object data to the function from create.js
+    };
+    localStorage.setItem('todoItems', JSON.stringify(todoItems)); //Commit the changes to memory.
+    //There is no need to refresh the list as the user input will always reflect the latest changes to the list item
+  });
+  };
 
+
+  const enterPreventer = (e) => {
+    e.addEventListener("keydown", (e => { //when the "Enter" key is hit
+        if (e.key === "Enter" && !e.shiftKey) {
+          // prevent enter
+          e.preventDefault();
+          addTodo(``);
+          return false;
+        }
+      }));
+  };
+
+
+//! Line 86: Inside on the array, find the index of the first item that matches the following criteria:
+
+//! Each object inside of the array gets passed as the argument for the "item" parameter
+//! If the id of the item (ID of the object at index "i") matches the id of the current object (and thus, the new object), execute the following ..
 
 // const updateFunc = () => {
 // };
@@ -99,12 +121,6 @@ export const renderTodo = (todo, theId) => { //start of the function
   // listItem.appendChild(newTextArea);
   // listItem.appendChild(newBtn);
 //? Disregard
-
-
-
-
-
-
 
 
 // setTimeout(()=> {
