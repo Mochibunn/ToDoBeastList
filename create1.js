@@ -2,10 +2,12 @@ console.log(`Hello from create1.js! ENGINE REWORK IN PROGRESS`);
 import { renderTodo } from "./update.js";
 
 export let todoItems = [];
-export const setTodoItems = (value, index) => {
+export const setTodoItems = (value) => {
+  todoItems = value;
+}; 
+export const setTodoItemsIndex = (value, index) => {
   todoItems[index] = value;
 }; 
-
 export const list = document.querySelector('.js-todo-list');
 
 

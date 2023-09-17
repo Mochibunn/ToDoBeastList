@@ -1,5 +1,5 @@
 console.log(`Hello from update.js! ENGINE REWORK IN PROGRESS`); //!Debug
-import { addTodo, list, setTodoItems, todoItems, txtTrim } from "./create1.js"; //Import data array and text trimming functions
+import { addTodo, list, setTodoItems, setTodoItemsIndex, todoItems, txtTrim } from "./create1.js"; //Import data array and text trimming functions
 import { deleteTodo } from "./delete.js";
 import { txtResize } from "./resize.js"; //Import a function that automatically resizes the text input area to fit more text
 
@@ -69,8 +69,6 @@ export const renderTodo = (todo, theId) => { //start of the function
     const itemLi = document.querySelector(`[data-key='${todo.id}']`);
     
     const txtArea = itemLi.querySelector(`textarea`);
-    console.log(`keyUp function! Todo id: ${todo.id}`);
-    console.log(txtArea.value);
     const text = txtArea.value;
     const updateObj = {
       text,
@@ -82,8 +80,8 @@ export const renderTodo = (todo, theId) => { //start of the function
 
     if (index !== -1) {
       // Object with the specified ID found, replace it with updateObj
-      
-      setTodoItems(updateObj, index);
+
+      setTodoItemsIndex(updateObj, index);
     };
     localStorage.setItem('todoItems', JSON.stringify(todoItems));
   });
