@@ -5,6 +5,7 @@ import { txtResize } from "./resize.js"; //Import a function that automatically 
 
 
 export const renderTodo = (todo, mid) => { //start of the function
+  // localStorage.setItem('todoItems', JSON.stringify(todoItems));//? Check
   const item = document.querySelector(`[data-key='${todo.id}']`); //select the LI tag with the corresponding ID inside of the DOM
   if (todo.deleted) { //if it's marked for deletion
     item.remove(); //remove the LI tag
@@ -53,8 +54,14 @@ export const renderTodo = (todo, mid) => { //start of the function
     console.log(`Hehe, is this your item ma'am?`)
     console.log(prevItm);
     prevItm.after(node);
+
+    txtTrim(newTextArea);
+    txtUpdate(newTextArea, todo);
+    txtResize(newTextArea);
+    enterPreventer(newTextArea, todo);
+    newTextArea.focus();
     return;
-  } //! Fix me! 
+  }
   list.appendChild(node); //append the new LI to the UL
 
   txtTrim(newTextArea); //add an event listener that trims user input
@@ -104,11 +111,8 @@ export const renderTodo = (todo, mid) => { //start of the function
       };
       const index = todoItems.findIndex(item => item.id === todo.id) + 1;
       const splicer = todoItems.splice(index, 0, element);
-      console.log(splicer);
       const mid = todo.id;
       renderTodo(element, mid);
-      // setTodoItems(splicer);
-      // renderTodo(element);
   };
 
   const enterPreventer = (e, todo) => {
@@ -123,7 +127,7 @@ export const renderTodo = (todo, mid) => { //start of the function
   };
 
 
-//! Line 85: Inside on the array, find the index of the first item that matches the following criteria:
+//! Line 90: Inside on the array, find the index of the first item that matches the following criteria:
 
 //! Each object inside of the array gets passed as the argument for the "item" parameter
 //! If the id of the item (ID of the object at index "i") matches the id of the current object (and thus, the new object), execute the following ..

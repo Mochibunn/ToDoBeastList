@@ -11,15 +11,13 @@ export const toggleDone = (key) => {
 list.addEventListener('click', event => {
   if (event.target.classList.contains('js-tick')) {
     const itemKey = event.target.parentElement.dataset.key;
-    localStorage.setItem('todoItems', JSON.stringify(todoItems));
-    console.log(`Here's the itemKey:`);
-    console.log(itemKey);
     toggleDone(itemKey);
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
   }
   localStorage.setItem('todoItems', JSON.stringify(todoItems));
   if (event.target.classList.contains('js-delete-todo')) {
     const itemKey = event.target.parentElement.dataset.key;
-    localStorage.setItem('todoItems', JSON.stringify(todoItems));
     deleteTodo(itemKey);
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
   }
 });
