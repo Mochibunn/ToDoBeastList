@@ -13,6 +13,7 @@ export const deleteTodo = (key) => { //accepts the button id as the key
   localStorage.setItem('todoItems', JSON.stringify(todoItems)); //commits the change to memory
   renderTodo(todo); //refresh the list to reflect the change
 }
+
 // export let close = document.getElementsByClassName("delete-item");
 
 // export const forLoop = for (let i = 0; i < close.length; i++) {
@@ -21,4 +22,4 @@ export const deleteTodo = (key) => { //accepts the button id as the key
 //     div.style.display = "none";
 //   }
 // };
-//? Old failed attempt
+//? Rohini's honest attempt!

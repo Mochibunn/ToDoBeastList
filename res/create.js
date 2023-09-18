@@ -7,7 +7,6 @@ export const setTodoItemsIndex = (value, index) => todoItems[index] = value;
 export const list = document.querySelector('.js-todo-list');
 
 
-
 export const addTodo = (text) => {
   const todo = {
     text,

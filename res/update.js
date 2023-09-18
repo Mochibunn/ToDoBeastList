@@ -1,5 +1,5 @@
 console.log(`Hello from update.js!`); //!Debug
-import { addTodo, list, setTodoItems, setTodoItemsIndex, todoItems, txtTrim } from "./create.js"; //import data array and text trimming functions
+import { addTodo, list, setTodoItemsIndex, todoItems, txtTrim } from "./create.js"; //import data array and text trimming functions
 import { deleteTodo } from "./delete.js"; //import a function that does the deleting work
 import { txtResize } from "./resize.js"; //import a function that automatically resizes the text input area to fit more text
 
@@ -40,39 +40,84 @@ export const renderTodo = (todo, mid) => { //start of the function
           delIcon.setAttribute(`alt`, `Recycle bin icon`); //* A11Y FTW, add alt text for a better a11y score
       delBtn.appendChild(delIcon); //Turn the SVG image into the button itself
     const newBtn = document.createElement(`button`); //Create a new button
-      newBtn.setAttribute(`class`, `addBtn`); //Give it a class
+      newBtn.setAttribute(`class`, `add-btn`); //Give it a class
       newBtn.textContent = `+`; //Make it a simple + icon
-      newBtn.addEventListener("click", () => { midInsert(todo) });
+      newBtn.addEventListener("click", () => { midInsert(todo) });//execute function on click
 
-  node.appendChild(newChkBox); //Append the checkbox to the LI
-  node.appendChild(newLabel); //Append the label with textbox ti the LI
-  node.appendChild(newBtn); //Append the new button to the LI
-  node.appendChild(delBtn); //Append the delete button to the LI
-  newTextArea.focus() //focus input on the newly created textbox
-  if (typeof mid === `number`) { //if the type of the "mid" argument is a number ..
-    const prevItm = list.querySelector(`[data-key='${mid}']`); //.. select the current <li>
-    prevItm.after(node); //add a new <li> after the current one
+      node.appendChild(newChkBox); //Append the checkbox to the LI
+      node.appendChild(newLabel); //Append the label with textbox ti the LI
+      node.appendChild(newBtn); //Append the new button to the LI
+      node.appendChild(delBtn); //Append the delete button to the LI
+      if (typeof mid === `number`) { //if the type of the "mid" argument is a number ..
+        const prevItm = list.querySelector(`[data-key='${mid}']`); //.. select the current <li>
+        prevItm.after(node); //add a new <li> after the current one
 
-    txtTrim(newTextArea); //(line 65)
-    txtUpdate(newTextArea, todo); //(line 66)
+        txtTrim(newTextArea); //(line 65)
+        txtUpdate(newTextArea, todo); //(line 66)
     txtResize(newTextArea); //(line 67)
     enterPreventer(newTextArea, todo); //(line 68)
+    visPersist(); //function that adds some visual functionality
     newTextArea.focus(); //(automatically switch cursor to the new <li>)
     return; //stop the execution of this function
   } //if the "mid" argument is not a number, execute this
   list.appendChild(node); //append the new LI to the UL
-
+  
   txtTrim(newTextArea); //add an event listener that trims user input
   txtUpdate(newTextArea, todo);//dd an event listener that updates the memory
   txtResize(newTextArea); //add an event listener that automatically resizes the textbox vertically depending on the amount of text
   enterPreventer(newTextArea, todo); //add an event listener that prevents the default Enter behavior inside of a textarea and executes a new line add
-
+  visPersist(); //function that adds some visual functionality
+  
   if (item) { //if item exists in the DOM ..
     list.replaceChild(node, item); //.. replace it
   } else { //otherwise ..
     list.append(node); //.. append the item to the end of the list
   }
-};
+};//end of the big scary function
+
+  const visPersist = () => { //function that will append event listeners to every <li> element
+    const listItems = document.querySelectorAll(".todo-item");
+
+    listItems.forEach((item) => {//adds event listeners to each <li> tag element
+      const checkbox = item.querySelector("input[type=checkbox]");//select the checkbox of the <li> the loop is working on
+      const textarea = item.querySelector(".liText"); //ditto
+      const buttons = item.querySelectorAll("button:not(.themeToggle)");//ditto unless the button has the .themeToggle class
+      
+      item.addEventListener("mouseover", () => {//add event listener for every instance a user hovers mouse over element
+        if (document.activeElement !== textarea) { //if the currently active element isn't the textares
+          checkbox.style.opacity = "1"; //reveal checkbox
+          buttons.forEach((button) => { //reveal each button
+            button.style.opacity = "1";
+          });
+        }
+      });
+
+      item.addEventListener("mouseout", () => {//add event listener for every instance a user hovers mouse out of element
+        if (document.activeElement !== textarea) {
+          checkbox.style.opacity = "0";
+          buttons.forEach((button) => {
+            button.style.opacity = "0";
+          });
+        }
+      });
+
+      textarea.addEventListener("focus", () => {//add event listener for every instance a user is currently focused on the textarea
+        checkbox.style.opacity = "1";
+        buttons.forEach((button) => {
+          button.style.opacity = "1";
+        });
+      });
+
+      textarea.addEventListener("blur", () => {//add event listener for every instance a user stops being focused on the textarea
+        if (!item.contains(document.activeElement)) {
+          checkbox.style.opacity = "0";
+          buttons.forEach((button) => {
+            button.style.opacity = "0";
+          });
+        }
+      });
+    });
+  };
 
   const txtUpdate = (e, todo) => { //function that accepts the element and current object as its arguments
   e.addEventListener("keyup", () => { //while we're in this function, add an event listener that listens to every keypress on this specific user input field
@@ -118,7 +163,7 @@ export const renderTodo = (todo, mid) => { //start of the function
 
 //! Line 17: This ternary operator checks whether the object's "checked" key value is set to true or false. If it's true, the <li> tags gets a ".done" class which applies the CSS effect to cross out the text. If false, it removes the aforementioned class and the styling.
 
-//! Line 87: Inside on the array, find the index of the first item that matches the following criteria:
+//! Line 152: Inside on the array, find the index of the first item that matches the following criteria:
 
 //! Each object inside of the array gets passed as the argument for the "item" parameter
 //! If the id of the item (ID of the object at index "i") matches the id of the current object (and thus, the new object), execute the following ..
