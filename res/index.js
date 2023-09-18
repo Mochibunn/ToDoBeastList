@@ -23,11 +23,11 @@ document.addEventListener('DOMContentLoaded', () => { //when the entire DOM load
 
 const systemSettingLight = window.matchMedia("(prefers-color-scheme: light)");
 
-const calcSet = ({ localStorageTheme, systemSettingDark }) => {
-  if (localStorageTheme !== null) {
-    return localStorageTheme;
+const calcSet = ({ localStore, sysDark }) => {
+  if (localStore !== null) {
+    return localStore;
   }
-  if (systemSettingDark.matches) {
+  if (sysDark.matches) {
     return "dark";
   }
   return "light";
@@ -41,17 +41,17 @@ const updateThm = ({ theme }) => {
   document.querySelector("html").setAttribute("data-theme", theme);
 };
 const button = document.querySelector("[data-theme-toggle]");
-const localStorageTheme = localStorage.getItem("theme");
-const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
-let currentThemeSetting = calcSet({ localStorageTheme, systemSettingDark });
-updateBtn({ btnE: button, isDark: currentThemeSetting === "dark" });
-updateThm({ theme: currentThemeSetting });
+const localStore = localStorage.getItem("theme");
+const sysDark = window.matchMedia("(prefers-color-scheme: dark)");
+let currThm = calcSet({ localStore, sysDark: sysDark });
+updateBtn({ btnE: button, isDark: currThm === "dark" });
+updateThm({ theme: currThm });
 button.addEventListener("click", (event) => {
-  const newTheme = currentThemeSetting === "dark" ? "light" : "dark";
-  localStorage.setItem("theme", newTheme);
-  updateBtn({ btnE: button, isDark: newTheme === "dark" });
-  updateThm({ theme: newTheme });
-  currentThemeSetting = newTheme;
+  const newThm = currThm === "dark" ? "light" : "dark";
+  localStorage.setItem("theme", newThm);
+  updateBtn({ btnE: button, isDark: newThm === "dark" });
+  updateThm({ theme: newThm });
+  currThm = newThm;
 });
 
 //! Line 17: Usually, this line would be written as:
