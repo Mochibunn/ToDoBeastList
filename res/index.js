@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => { //when the entire DOM load
   }
 });
 
-const systemSettingLight = window.matchMedia("(prefers-color-scheme: light)");
+const sysLight = window.matchMedia("(prefers-color-scheme: light)");
 
 const calcSet = ({ localStore, sysDark }) => {
   if (localStore !== null) {
