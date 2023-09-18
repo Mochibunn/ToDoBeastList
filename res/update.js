@@ -84,7 +84,7 @@ export const renderTodo = (todo, mid) => { //start of the function
       const buttons = item.querySelectorAll("button:not(.themeToggle)");//ditto unless the button has the .themeToggle class
       
       item.addEventListener("mouseover", () => {//add event listener for every instance a user hovers mouse over element
-        if (document.activeElement !== textarea) { //if the currently active element isn't the textares
+        if (document.activeElement !== textarea) { //if the currently active element isn't the textareas
           checkbox.style.opacity = "1"; //reveal checkbox
           buttons.forEach((button) => { //reveal each button
             button.style.opacity = "1";
