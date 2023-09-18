@@ -6,7 +6,8 @@ import "./delete.js";
 import "./resize.js"
 
 window.addEventListener("load", (() => { //when the window loads
-  if (todoItemhs.lengt === 0) { //if the length of the array is 0 
+  localStorage.getItem("theme");
+  if (todoItems.length === 0) { //if the length of the array is 0 
     addTodo(`Click me to start editing!`); //add the first list item
   }
 }));
@@ -20,9 +21,40 @@ document.addEventListener('DOMContentLoaded', () => { //when the entire DOM load
   }
 });
 
+const systemSettingLight = window.matchMedia("(prefers-color-scheme: light)");
 
+const calcSet = ({ localStorageTheme, systemSettingDark }) => {
+  if (localStorageTheme !== null) {
+    return localStorageTheme;
+  }
+  if (systemSettingDark.matches) {
+    return "dark";
+  }
+  return "light";
+};
+const updateBtn = ({ btnE, isDark }) => {
+  const btnStatus = isDark ? "💡" : "🌙";
+  btnE.setAttribute("aria-label", btnStatus);
+  btnE.innerText = btnStatus;
+};
+const updateThm = ({ theme }) => {
+  document.querySelector("html").setAttribute("data-theme", theme);
+};
+const button = document.querySelector("[data-theme-toggle]");
+const localStorageTheme = localStorage.getItem("theme");
+const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
+let currentThemeSetting = calcSet({ localStorageTheme, systemSettingDark });
+updateBtn({ btnE: button, isDark: currentThemeSetting === "dark" });
+updateThm({ theme: currentThemeSetting });
+button.addEventListener("click", (event) => {
+  const newTheme = currentThemeSetting === "dark" ? "light" : "dark";
+  localStorage.setItem("theme", newTheme);
+  updateBtn({ btnE: button, isDark: newTheme === "dark" });
+  updateThm({ theme: newTheme });
+  currentThemeSetting = newTheme;
+});
 
-//! Line 14: Usually, this line would be written as:
+//! Line 17: Usually, this line would be written as:
 //?  "todoItems = JSON.parse(ref);"
 //! But this code doesn't work on imported variables.
 

@@ -1,6 +1,23 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
+[data-theme="light"] {
+  --color-bg: #f5f5f4;
+  --color-fg: #140001;
+}
+[data-theme="dark"] {
+  --color-bg: #0e0016;
+  --color-fg: #fffec8;
+}
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
+.themeToggle {
+  font-size: 1.5em;
+  color: var(--color-fg);
+  opacity: 1;
+}
 ul, li {
   padding: 0;
   list-style: none;
@@ -19,75 +36,87 @@ input {
   font-weight: bold;
   text-decoration: none;
   width: 100%;
+  background-color: transparent;
+  color: var(--color-fg);
 }
 textarea.liText {
+  background-color: transparent;
   border: none;
+  border-bottom: solid 1px transparent;
   font-size: 2em;
   font-weight: 400;
   text-decoration: none;
   width: 70vw;
+  transition: border-bottom 0.2s ease-in-out;
+  transition-delay: 0.2s;
+  color: var(--color-fg);
 }
-textarea:focus{
-  border-bottom: solid 1px #000000;
+textarea.liText:focus{
+  border-bottom: solid 1px var(--color-fg);
+  transition-delay: 0s;
+  outline: none;
+}
+textarea.liText:hover{
+  border-bottom: solid 1px var(--color-fg);
+  transition-delay: 0s;
+  outline: none;
 }
 input[type=checkbox]{
-  accent-color: #000000; 
+  accent-color: var(--color-fg); 
   width: fit-content; 
-  margin: auto 0;
+  margin: auto 0.1em auto 0;
   opacity: 0;
+  accent-color: transparent;
   transition: opacity 0.3s ease-in-out;
   transition-delay: 0.2s;
 }
-
 button {
-    background-color: #ffffff;
-    border: none;
-    font-size: 2em;
-    font-weight: bold;
-    width: 40px;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    transition-delay: 0.2s;
+  background-color: transparent;
+  border: none;
+  font-size: 2em;
+  font-weight: bold;
+  width: 40px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  transition-delay: 0.2s;
+  color: var(--color-fg);
 }
-li:hover > button{
+
+li:hover > button,
+li:hover > input[type="checkbox"] {
   opacity: 1;
   transition-delay: 0s;
+  background-color: transparent;
 }
-li:hover > input[type=checkbox]{
-  opacity: 1;
-  transition-delay: 0s;
-}
-/* input[type=checkbox]:hover button:hover{} */
 .tick {
   width: 30px;
   height: 30px;
-  border: 3px solid #333;
+  border: 3px solid var(--color-fg);
   display: inline-flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color: var(--color-fg);
 }
-
 .tick::before {
   content: '✓';
   font-size: 0.25em;
   display: none;
+  color: var(--color-fg);
 }
-
 .done .tick::before {
   display: inline;
 }
 .done textarea {
   text-decoration: line-through;
 }
-
 .liText {
   font-family: Arial, Helvetica, sans-serif;
   resize: none;
   overflow: hidden;
 }
 #decoration {
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid var(--color-fg);
   padding-top: 1%;
 }
 input:focus::placeholder {
@@ -95,12 +124,14 @@ input:focus::placeholder {
   outline: none;
 }
 input::placeholder{
-  color: #000000;
+  color: var(--color-fg);
 } 
-input:focus, textarea:focus {
+input:focus {
   outline: none;
 }
 img {
   height: 1.25em;
 }
-/* !Do not change any CSS above unless absolutely necessary (Ask Mochi first to avoid merge conflicts) */
+@media screen and (min-width: 500px){
+  
+}
