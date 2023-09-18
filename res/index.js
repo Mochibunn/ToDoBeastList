@@ -21,16 +21,14 @@ document.addEventListener('DOMContentLoaded', () => { //when the entire DOM load
   }
 });
 
-const sysLight = window.matchMedia("(prefers-color-scheme: light)");
-
 const calcSet = ({ localStore, sysDark }) => {
   if (localStore !== null) {
     return localStore;
   }
   if (sysDark.matches) {
-    return "dark";
+    return "light";
   }
-  return "light";
+  return "dark";
 };
 const updateBtn = ({ btnE, isDark }) => {
   const btnStatus = isDark ? "💡" : "🌙";
@@ -46,7 +44,7 @@ const sysDark = window.matchMedia("(prefers-color-scheme: dark)");
 let currThm = calcSet({ localStore, sysDark: sysDark });
 updateBtn({ btnE: button, isDark: currThm === "dark" });
 updateThm({ theme: currThm });
-button.addEventListener("click", (event) => {
+button.addEventListener("click", () => {
   const newThm = currThm === "dark" ? "light" : "dark";
   localStorage.setItem("theme", newThm);
   updateBtn({ btnE: button, isDark: newThm === "dark" });
@@ -61,6 +59,8 @@ button.addEventListener("click", (event) => {
 //! Imported variables will ALWAYS be imported as read-only variables aka a const, no matter if you declared your export variable as a let or var
 
 //! In this case, we need to create an export variable that will contain a function that would accept your data and manipulate the variable from within the original file. In our case, back in 'create.js', we have a function 'setTodoItems'.
+
+
 
 
 
