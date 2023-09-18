@@ -61,3 +61,25 @@ button.addEventListener("click", (event) => {
 //! Imported variables will ALWAYS be imported as read-only variables aka a const, no matter if you declared your export variable as a let or var
 
 //! In this case, we need to create an export variable that will contain a function that would accept your data and manipulate the variable from within the original file. In our case, back in 'create.js', we have a function 'setTodoItems'.
+
+
+
+
+
+{/* To-do Beast List - a versatile, flexible to-do list using JS 
+Copyright (C) 2023  Mochibun
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>. 
+
+hi@mochibun.me */}
