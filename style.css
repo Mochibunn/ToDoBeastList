@@ -1,5 +1,6 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
+  max-width: 100vw;
 }
 [data-theme="light"] {
   --color-bg: #f5f5f4;
@@ -12,6 +13,7 @@
   --filter: invert(94%) sepia(9%) saturate(988%) hue-rotate(5deg) brightness(108%) contrast(105%);
 }
 body {
+  margin: 1% 10vw;
   background-color: var(--color-bg);
   color: var(--color-fg);
 }
@@ -28,9 +30,6 @@ li {
   display: flex;
   flex-flow: nowrap;
   justify-content: space-between;
-}
-body {
-  margin: 1% 10vw;
 }
 input {
   border: none;
